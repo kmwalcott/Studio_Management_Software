@@ -1,0 +1,38 @@
+{
+  "name": "studio_management_software",
+  "version": "1.0.0",
+  "description": "Manage staff and students for a music studio",
+  "main": "server.js",
+  "engines": {
+    "node": "10.18",
+    "npm": "6.13.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run watch\" \"npm run client\""
+  },
+  "author": "Kyle Walcott",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-jwt": "^5.3.3",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.8.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.9.7"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.3"
+  }
+}
