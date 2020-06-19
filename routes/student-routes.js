@@ -3,6 +3,7 @@ const router = express.Router();
 const Students = require('../models/Students.js');
 const Queries = require('../models/Queries');
 const { check, validationResult } = require('express-validator');
+const base_url_client = process.env.BASE_URL_CLIENT;
 
 
 //Note: Student model has 17 fields. 
@@ -45,7 +46,7 @@ router.post('/',
     var newStudent = new Students(student_object);
     newStudent.save((err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/students')}
+        else{res.status(200).redirect(`${base_url_client}/admin/students`)}
     })
 })
 
