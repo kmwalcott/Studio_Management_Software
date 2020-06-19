@@ -5,6 +5,7 @@ const moment = require('moment');
 const { check, validationResult } = require('express-validator');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
+const base_url_client = process.env.BASE_URL_CLIENT;
 
 //@Route post request to /events/single-event
 //@Description: Create a single new event. Form submission. 
@@ -37,7 +38,7 @@ router.post('/single-event',
     var newEvent = new Events(event_object);
     newEvent.save((err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/hours')} 
+        else{res.status(200).redirect(`${base_url_client}/admin/hours`)} 
     })    
 })
 
@@ -100,7 +101,7 @@ router.post('/multiple-events',
     Events.insertMany(multiple_events, (err,result)=>{
         
         if(err){res.status(400).json(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/hours')}
+        else{res.status(200).redirect(`${base_url_client}/admin/hours`)}
         
     })
     
@@ -450,7 +451,7 @@ router.post('/update',
     Events.updateMany({_id: {$in: selected}}, update, (err,result)=>{
         
         if(err){res.status(400).json(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/hours')}
+        else{res.status(200).redirect(`${base_url_client}/admin/hours`)}
     })
     
 })
@@ -465,7 +466,7 @@ router.post('/edit-attendance',(req,res)=>{
 
     Events.findOneAndUpdate({_id: id},{attendance: attendance}, {useFindAndModify: false}, (err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/attendance')}
+        else{res.status(200).redirect(`${base_url_client}/attendance`)}
     })
 })
 

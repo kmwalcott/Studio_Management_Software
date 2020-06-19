@@ -4,6 +4,7 @@ const Staff = require('../models/Staff.js');
 const { check, validationResult } = require('express-validator');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
+const base_url_client = process.env.BASE_URL_CLIENT;
 
 //@Route post request to /staff
 //@Description: Create a new staff member. Form submission. 
@@ -28,7 +29,7 @@ router.post('/',
     var newStaff = new Staff(staff_object);
     newStaff.save((err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/staff')}
+        else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
         
         
     })
@@ -129,7 +130,7 @@ router.post('/update',
 
     Staff.findOneAndUpdate({ "name": req.body.name },{name:req.body.name, birthday:req.body.birthday, email:req.body.email, phone:req.body.phone}, {useFindAndModify: false}, (err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/staff')}
+        else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
     })
 
 })
@@ -144,7 +145,7 @@ router.delete('/', (req,res) =>{
     
     Staff.deleteOne({ name:name },(err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/staff')}
+        else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
     })
 
 })

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Settings = require('../models/Settings');
+const base_url_client = process.env.BASE_URL_CLIENT;
 
 //@Route get request to /settings
 //@Description: Get settings.  
@@ -26,25 +27,25 @@ router.post('/add-setting', (req,res) =>{
         case 'event_type':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $push: {event_type: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         case 'location':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $push: {location: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         case 'teacher':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $push: {teacher: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         case 'instrument':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $push: {instrument: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         default:
@@ -64,25 +65,25 @@ router.post('/drop-setting', (req,res) =>{
         case 'event_type':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $pull: {event_type: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         case 'location':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $pull: {location: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         case 'teacher':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $pull: {teacher: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         case 'instrument':
             Settings.findOneAndUpdate({_id:"5ea6fcb24296ea4818494a2a"}, { $pull: {instrument: value} }, {useFindAndModify: false}, (err,result)=>{
                 if(err){res.status(400).json(err)}
-                else{res.status(200).redirect("http://localhost:3000/admin/settings")}
+                else{res.status(200).redirect(`${base_url_client}/admin/settings`)}
             })
             break;
         default:

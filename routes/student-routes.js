@@ -129,7 +129,7 @@ router.post('/search', (req,res) =>{
             if(err){
                 res.status(400).json(err)
             }
-            res.redirect('http://localhost:3000/studentinfo');  
+            res.redirect(`${base_url_client}/studentinfo`);  
         })
     })
 
@@ -194,7 +194,7 @@ router.post('/update',
     }, 
         {useFindAndModify: false}, (err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/students')}
+        else{res.status(200).redirect(`${base_url_client}/admin/students`)}
     })
 })
 
@@ -208,7 +208,7 @@ router.delete('/', (req,res) =>{
     
     Students.deleteOne({student_name: name },(err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect('http://localhost:3000/admin/students')}
+        else{res.status(200).redirect(`${base_url_client}/admin/students`)}
     })
 
 })

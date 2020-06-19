@@ -6,6 +6,9 @@ import Event from '../Event'
 import Pagination from '../Pagination';
 
 export default function EditEvents() {
+    //Base url client
+    const base_url_client = process.env.REACT_APP_BASE_URL_CLIENT;
+    
     //States
     const [events, setEvents] = useState([]);
     const [eventTypeList, setEventTypeList] = useState([]);
@@ -80,7 +83,7 @@ export default function EditEvents() {
             xhr.onload = function(){
                 if (xhr.readyState === 4){
                     if (xhr.status === 200){ 
-                        window.location.replace("http://localhost:3000/admin/hours");
+                        window.location.replace(`${base_url_client}/admin/hours`);
                     }
                 }
             

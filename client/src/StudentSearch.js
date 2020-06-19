@@ -49,7 +49,7 @@ export default function StudentSearch() {
 
 
     if (advancedIsOpen) {
-        var action = `${process.env.REACT_APP_BASE_URL}/students/search`
+        var action = `${process.env.REACT_APP_BASE_URL}/students/search`;
         return (
             <form method="POST" action={action}>
                 <input type="text" name="student_name" id="student_name" placeholder="Find student" />
@@ -145,7 +145,7 @@ export default function StudentSearch() {
     }
 
     else {
-        action = `http://localhost:5000/students/search`;
+        action = `${process.env.REACT_APP_BASE_URL}/students/search`;
         return (
             
             <form method="POST" action={action}>
