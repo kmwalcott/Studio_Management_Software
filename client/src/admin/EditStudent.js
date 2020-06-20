@@ -22,7 +22,6 @@ export default function EditStudent() {
       },[]);
 
     function get_students(){
-        
         const xhr = new XMLHttpRequest();
         xhr.open('GET', `${process.env.REACT_APP_BASE_URL}/students`, true);
         xhr.setRequestHeader("Content-Type", "application/json");

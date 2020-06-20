@@ -4,7 +4,6 @@ const Staff = require('../models/Staff.js');
 const { check, validationResult } = require('express-validator');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
-const base_url_client = process.env.BASE_URL_CLIENT;
 
 //@Route post request to /staff
 //@Description: Create a new staff member. Form submission. 
@@ -20,6 +19,7 @@ router.post('/',
         return res.status(422).json({ errors: errors.array() });
     }
     
+    var base_url_client = process.env.BASE_URL_CLIENT;
     let staff_object = {
        
         name: req.body.name, birthday:req.body.birthday, email:req.body.email, phone:req.body.phone, hours:[]
@@ -40,27 +40,20 @@ router.post('/',
 //@Description: Get all staff.  
 //Access: Public
 router.get('/', (req,res) =>{
-    
     Staff.find({}, (err,result)=>{
         if(err){res.status(400).json(err)}
         else{res.status(200).json(result)}
     })
-
 })
-
 
 //@Route post request to /staff/staff-info-form
 //@Description: Get specific employee's data to display in form. Ajax request.   
 //Access: Admin 
 router.post('/staff-info-form', (req,res) =>{
-    var body = req.body;
-    var name = body.name;
-
-    Staff.find({name: name },{_id:0},(err,result)=>{
+    Staff.find({name: req.body.name },{_id:0},(err,result)=>{
         if(err){res.status(400).send(err)}
         else{res.status(200).json(result)}
     })
-
 })
 
 //@Route post request to /staff/get-hours
@@ -138,7 +131,7 @@ router.post('/update',
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
-
+    var base_url_client = process.env.BASE_URL_CLIENT;
     Staff.findOneAndUpdate({ "name": req.body.name },{name:req.body.name, birthday:req.body.birthday, email:req.body.email, phone:req.body.phone}, {useFindAndModify: false}, (err,result)=>{
         if(err){res.status(400).send(err)}
         else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
@@ -150,15 +143,11 @@ router.post('/update',
 //@Description: Delete a staff member. Ajax request.  
 //Access: Admin only
 router.delete('/', (req,res) =>{
-
-    var body = req.body;
-    var name = body.name;
-    
-    Staff.deleteOne({ name:name },(err,result)=>{
+    var base_url_client = process.env.BASE_URL_CLIENT;
+    Staff.deleteOne({ name: req.body.name },(err,result)=>{
         if(err){res.status(400).send(err)}
         else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
     })
-
 })
 
 module.exports = router;

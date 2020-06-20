@@ -5,7 +5,6 @@ const moment = require('moment');
 const { check, validationResult } = require('express-validator');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
-const base_url_client = process.env.BASE_URL_CLIENT;
 
 //@Route post request to /events/single-event
 //@Description: Create a single new event. Form submission. 
@@ -21,6 +20,7 @@ router.post('/single-event',
         return res.status(422).json({ errors: errors.array() });
     }
     
+    var base_url_client = process.env.BASE_URL_CLIENT;
     var date_parts = req.body.date.split('/');
     var month = parseInt(date_parts[0]) - 1;
     var date = parseInt(date_parts[1]);
@@ -97,7 +97,7 @@ router.post('/multiple-events',
     }
     
     //console.log(multiple_events);
-    
+    var base_url_client = process.env.BASE_URL_CLIENT;
     Events.insertMany(multiple_events, (err,result)=>{
         
         if(err){res.status(400).json(err)}
@@ -447,7 +447,7 @@ router.post('/update',
     }
 
 
-    
+    var base_url_client = process.env.BASE_URL_CLIENT;
     Events.updateMany({_id: {$in: selected}}, update, (err,result)=>{
         
         if(err){res.status(400).json(err)}
@@ -463,6 +463,7 @@ router.post('/edit-attendance',(req,res)=>{
     var body = req.body;
     var id = body._id;
     var attendance = body.attendance;
+    var base_url_client = process.env.BASE_URL_CLIENT;
 
     Events.findOneAndUpdate({_id: id},{attendance: attendance}, {useFindAndModify: false}, (err,result)=>{
         if(err){res.status(400).send(err)}

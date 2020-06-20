@@ -3,7 +3,6 @@ const router = express.Router();
 const Students = require('../models/Students.js');
 const Queries = require('../models/Queries');
 const { check, validationResult } = require('express-validator');
-const base_url_client = process.env.BASE_URL_CLIENT;
 
 
 //Note: Student model has 17 fields. 
@@ -23,7 +22,7 @@ router.post('/',
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
-    
+    var base_url_client = process.env.BASE_URL_CLIENT;
     let student_object = {
         student_name:req.body.student_name, 
         parent_names:req.body.parent_names, 
@@ -50,8 +49,18 @@ router.post('/',
     })
 })
 
+//@Route get request to /students
+//@Description: Get all students.
+//Access: Sign in required
+router.get('/', (req,res) =>{
+    Students.find({}, (err,result)=>{
+        if(err){res.status(400).json(err)}
+        else{res.status(200).json(result)}
+    })
+})
+
 //@Route post request to /students/get-students
-//@Description: Get students.  
+//@Description: Get students only for current user.  
 //Access: Sign in required
 router.post('/get-students', (req,res) =>{
     var user = req.body.user;
@@ -71,6 +80,7 @@ router.post('/search', (req,res) =>{
     var conditional_filter = {};
     var include_string = 'student_name';
     var body = req.body;   
+    var base_url_client = process.env.BASE_URL_CLIENT;
     
     //Filtered non-lesson fields, 4 total
     var student_name = body.student_name;
@@ -140,14 +150,10 @@ router.post('/search', (req,res) =>{
 //@Description: Get specific student's data to display in form being edited. Ajax request.   
 //Access: Login required
 router.post('/student-info-form', (req,res) =>{
-    var body = req.body;
-    var student_name = body.student_name;
-
-    Students.find({ student_name:student_name },{_id:0},(err,result)=>{
+    Students.find({ student_name: req.body.student_name },{_id:0},(err,result)=>{
         if(err){res.status(400).send(err)}
         else{res.status(200).json(result)}
     })
-
 })
 
 
@@ -180,6 +186,8 @@ router.post('/update',
         return res.status(422).json({ errors: errors.array() });
     }
 
+    
+    var base_url_client = process.env.BASE_URL_CLIENT;
     Students.findOneAndUpdate({ "student_name": req.body.student_name },
     {
         student_name: req.body.student_name, 
@@ -203,15 +211,12 @@ router.post('/update',
 //@Description: Delete a student. Ajax request.   
 //Access: Admin only
 router.delete('/', (req,res) =>{
-
-    var body = req.body;
-    let name = body.name;
+    var base_url_client = process.env.BASE_URL_CLIENT;
     
-    Students.deleteOne({student_name: name },(err,result)=>{
+    Students.deleteOne({student_name: req.body.name },(err,result)=>{
         if(err){res.status(400).send(err)}
         else{res.status(200).redirect(`${base_url_client}/admin/students`)}
     })
-
 })
 
 module.exports = router;

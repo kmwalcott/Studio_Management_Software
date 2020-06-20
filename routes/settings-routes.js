@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Settings = require('../models/Settings');
-const base_url_client = process.env.BASE_URL_CLIENT;
 
 //@Route get request to /settings
 //@Description: Get settings.  
@@ -22,6 +21,7 @@ router.post('/add-setting', (req,res) =>{
     var body = req.body;
     var setting = body.setting;
     var value = body.value;
+    var base_url_client = process.env.BASE_URL_CLIENT;
 
     switch (setting){
         case 'event_type':
@@ -60,6 +60,7 @@ router.post('/drop-setting', (req,res) =>{
     var body = req.body;
     var setting = body.setting;
     var value = body.value;
+    var base_url_client = process.env.BASE_URL_CLIENT;
 
     switch (setting){
         case 'event_type':
