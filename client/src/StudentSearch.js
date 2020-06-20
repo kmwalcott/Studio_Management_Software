@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-
+import { useAuth0 } from "./react-auth0-spa";
 
 export default function StudentSearch() {
+    const {user, isAuthenticated} = useAuth0();
 
     //Declare state variables
     const [advancedIsOpen, setAdvancedIsOpen] = useState(false);
@@ -50,7 +51,13 @@ export default function StudentSearch() {
 
     if (advancedIsOpen) {
         var action = `${process.env.REACT_APP_BASE_URL}/students/search`;
+        var whos_logged_in = '';
+        if(isAuthenticated){
+            whos_logged_in = `User: ${user.name}`;
+        }
+        else{}
         return (
+            <>
             <form method="POST" action={action}>
                 <input type="text" name="student_name" id="student_name" placeholder="Find student" />
                 <button type="submit">Search</button>
@@ -141,13 +148,20 @@ export default function StudentSearch() {
                     <input type="checkbox" checked name="include_email" id="include_email" value="checked" />
                 </fieldset>
             </form>
+            <p>{whos_logged_in}</p>
+            </>
         )
     }
 
     else {
         action = `${process.env.REACT_APP_BASE_URL}/students/search`;
+        var whos_logged_in = '';
+        if(isAuthenticated){
+            whos_logged_in = `User: ${user.name}`;
+        }
+        else{}
         return (
-            
+            <>
             <form method="POST" action={action}>
                 <input type="text" name="student_name" id="student_name" required placeholder="Find student"/>
                 <input type="hidden" name="gender" value=""/>
@@ -174,7 +188,8 @@ export default function StudentSearch() {
                 <button type="submit">Search</button>
                 <button type="button" onClick={() => setAdvancedIsOpen(!(advancedIsOpen))}>Advanced</button>
             </form>
-
+            <p>{whos_logged_in}</p>
+            </>
         )
 
     }
