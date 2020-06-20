@@ -50,12 +50,13 @@ router.post('/',
     })
 })
 
-//@Route get request to /students
+//@Route post request to /students/get-students
 //@Description: Get students.  
 //Access: Sign in required
-router.get('/', (req,res) =>{
-    
-    Students.find({}, (err,result)=>{
+router.post('/get-students', (req,res) =>{
+    var user = req.body.user;
+
+    Students.find({teacher: user}, (err,result)=>{
         if(err){res.status(400).json(err)}
         else{res.status(200).json(result)}
     })

@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import Table from './Table';
+import { useAuth0 } from "./react-auth0-spa";
 
 export default function Calendar() {
+    const {user} = useAuth0();
+
     //States
     const today = new Date();
     const current_month = today.getMonth();
@@ -20,7 +23,7 @@ export default function Calendar() {
       }, [month]);
 
     function get_calendar_info(){
-        const toSend = {month: month, year: year};
+        const toSend = {month: month, year: year, user: user.name};
         const jsonString = JSON.stringify(toSend);
         const xhr = new XMLHttpRequest();
         xhr.open('POST', `${process.env.REACT_APP_BASE_URL}/events/calendar`, true);

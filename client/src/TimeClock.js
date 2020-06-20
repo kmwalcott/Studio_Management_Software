@@ -1,18 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import Table from './Table';
+import { useAuth0 } from "./react-auth0-spa";
 
 export default function TimeClock() {
+    const {user} = useAuth0();
+    
     //States
     const [rows, setRows] = useState([]);
-
+    
     //Effects
     useEffect(() => {
         get_hours();
     }, []);
 
     function get_hours(){
+        var toSend = {user: user.name};
+        var jsonString = JSON.stringify(toSend);
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `${process.env.REACT_APP_BASE_URL}/staff/hours`, true);
+        xhr.open('POST', `${process.env.REACT_APP_BASE_URL}/staff/get-hours`, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = function () {
             if (xhr.readyState === 4) {
@@ -22,11 +27,13 @@ export default function TimeClock() {
             }
 
         }
-        xhr.send();
+        xhr.send(jsonString);
     }
 
     //onclick function for "punch" button
     function time_punch(){
+        var toSend = {user: user.name};
+        var jsonString = JSON.stringify(toSend);
         const xhr = new XMLHttpRequest();
         xhr.open('PUT', `${process.env.REACT_APP_BASE_URL}/staff/hours`, true);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -38,7 +45,7 @@ export default function TimeClock() {
             }
 
         }
-        xhr.send();
+        xhr.send(jsonString);
     }
     
     var columns = ['Date', 'Time In', 'Time Out'];

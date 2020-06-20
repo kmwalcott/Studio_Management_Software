@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Event from './Event';
-
+import { useAuth0 } from "./react-auth0-spa"; 
 
 export default function Home() {
+    const {user} = useAuth0();
+
     //States and other variables 
     const today = new Date();
     const [month, setMonth] = useState(today.getMonth());
@@ -19,7 +21,7 @@ export default function Home() {
     }, [dayChange]);
 
     function get_home_info() {
-        var toSend = {daychange: dayChange};
+        var toSend = {daychange: dayChange, user: user.name};
         var jsonString = JSON.stringify(toSend);
         const xhr = new XMLHttpRequest();
         xhr.open('POST', `${process.env.REACT_APP_BASE_URL}/events/home`, true);

@@ -126,7 +126,7 @@ router.post('/home', (req,res)=>{
     var new_year = new_day.year();
     
     //Find events on new day
-    Events.find({time: { $gte: start_of_new_day, $lte: end_of_new_day }}, (err,result)=>{
+    Events.find({participants: req.body.user, time: { $gte: start_of_new_day, $lte: end_of_new_day }}, (err,result)=>{
         
         if(err){res.status(400).json(err)}
         else{res.status(200).json({events:result, month: new_month, date:new_date, year:new_year})}
@@ -137,8 +137,8 @@ router.post('/home', (req,res)=>{
 //@Description: Search events with filter.   
 //Access: Login required
 router.post('/attendance', (req,res)=>{
-    var body = req.body;
-    var student_name = body.student_name;
+    
+    var student_name = req.body.student_name;
 
     Events.find({participants: student_name}, (err,result)=>{
         
@@ -300,7 +300,7 @@ router.post('/calendar', async (req,res) =>{
         }
         
         //Make a query for all events in which the current user is a participant
-        var events = await Events.find({date: { $gte: start_of_month, $lte: end_of_month }});    
+        var events = await Events.find({participants: req.body.user, date: { $gte: start_of_month, $lte: end_of_month }});    
         //console.log(events);
         
         //Need a function to convert to my day numbering system (Monday is 0)

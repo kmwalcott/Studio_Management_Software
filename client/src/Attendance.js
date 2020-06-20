@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Event from './Event';
+import { useAuth0 } from "./react-auth0-spa";
 
 export default function Attendance() {
+    const {user} = useAuth0();
+
+    //States
     const [students, setStudents] = useState([]);
     const [events, setEvents] = useState([]);
 
@@ -11,9 +15,10 @@ export default function Attendance() {
     }, []);
 
     function get_students() {
-
+        var toSend = {user: user.name};
+        var jsonString = JSON.stringify(toSend);
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `${process.env.REACT_APP_BASE_URL}/students`, true);
+        xhr.open('POST', `${process.env.REACT_APP_BASE_URL}/students/get-students`, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = function () {
             if (xhr.readyState === 4) {
@@ -23,7 +28,7 @@ export default function Attendance() {
             }
 
         }
-        xhr.send();
+        xhr.send(jsonString);
     }
 
     //onChange function for dropdown. 
