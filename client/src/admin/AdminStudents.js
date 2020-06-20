@@ -9,7 +9,7 @@ export default function AdminStudents() {
         var toSend = {name: name};
         var jsonString = JSON.stringify(toSend);
         const xhr = new XMLHttpRequest();
-        xhr.open('DELETE', `${process.env.REACT_BASE_URL}/students`, true);
+        xhr.open('DELETE', `${process.env.REACT_APP_BASE_URL}/students`, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = function(){
             if (xhr.readyState === 4){
