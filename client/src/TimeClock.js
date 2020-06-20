@@ -43,7 +43,7 @@ export default function TimeClock() {
     
     var columns = ['Date', 'Time In', 'Time Out'];
     var rows_processed = [];
-    console.log(rows);
+    //console.log(rows);
     rows.forEach((row)=>{
         var column3 = '';
         var my_minutes_zero = '';

@@ -69,8 +69,14 @@ router.post('/staff-info-form', (req,res) =>{
 router.get('/hours', async (req,res) =>{
     try{
         var staff_member = await Staff.find({name:'Kyle Walcott'}, {hours:1});
-        var hours = staff_member[0].hours;
-        res.json(hours);
+        if(staff_member.length > 0){
+            var hours = staff_member[0].hours;
+            res.json(hours);
+        }
+        else{
+            hours = [];
+            res.json(hours);
+        }
     }
     catch (error){res.send(error)}
 })
@@ -82,34 +88,39 @@ router.put('/hours', async (req,res)=>{
     try{
         var date_today = new Date();
         var staff_member = await Staff.find({name:'Kyle Walcott'}, {hours:1});
-        var hours = staff_member[0].hours;
-        if(hours.length > 0){
-            var last_object = hours[hours.length - 1];
+        if(staff_member.length === 0){
+            var updated_hours = [];
+            res.json(updated_hours);
         }
-        
-        //No punches yet. Create new entry in hours array and change time_in to current time, time_out empty. 
-        if(typeof last_object === 'undefined'){
-            await Staff.findOneAndUpdate({name:'Kyle Walcott'}, {$push:{hours:[{time_in:date_today,time_out:''}]}}, {useFindAndModify: false}); 
-            var updated_object = await Staff.find({name:'Kyle Walcott'}, {hours:1}); 
-            var updated_hours = updated_object[0].hours;
-        }
-        
-        //User is clocked in. Must clock out. Change time_out in last entry of array.
-        else if(last_object.time_out === null){
-            await Staff.findOneAndUpdate({name:"Kyle Walcott", "hours._id":last_object._id}, {"hours.$.time_out": date_today}, {useFindAndModify: false});
-            var updated_object = await Staff.find({name:'Kyle Walcott'}, {hours:1}); 
-            var updated_hours = updated_object[0].hours;
-        }
-        
-        //User is clocked out. Must clock in. Create new entry in hours array and change time_in to current time, time_out empty.
         else{
-            await Staff.findOneAndUpdate({name:'Kyle Walcott'}, {$push:{hours:[{time_in:date_today,time_out:''}]}}, {useFindAndModify: false}); 
-            var updated_object = await Staff.find({name:'Kyle Walcott'}, {hours:1}); 
-            var updated_hours = updated_object[0].hours;
+            var hours = staff_member[0].hours;
+            if(hours.length > 0){
+                var last_object = hours[hours.length - 1];
+            }
+            
+            //No punches yet. Create new entry in hours array and change time_in to current time, time_out empty. 
+            if(typeof last_object === 'undefined'){
+                await Staff.findOneAndUpdate({name:'Kyle Walcott'}, {$push:{hours:[{time_in:date_today,time_out:''}]}}, {useFindAndModify: false}); 
+                var updated_object = await Staff.find({name:'Kyle Walcott'}, {hours:1}); 
+                var updated_hours = updated_object[0].hours;
+            }
+            
+            //User is clocked in. Must clock out. Change time_out in last entry of array.
+            else if(last_object.time_out === null){
+                await Staff.findOneAndUpdate({name:"Kyle Walcott", "hours._id":last_object._id}, {"hours.$.time_out": date_today}, {useFindAndModify: false});
+                var updated_object = await Staff.find({name:'Kyle Walcott'}, {hours:1}); 
+                var updated_hours = updated_object[0].hours;
+            }
+            
+            //User is clocked out. Must clock in. Create new entry in hours array and change time_in to current time, time_out empty.
+            else{
+                await Staff.findOneAndUpdate({name:'Kyle Walcott'}, {$push:{hours:[{time_in:date_today,time_out:''}]}}, {useFindAndModify: false}); 
+                var updated_object = await Staff.find({name:'Kyle Walcott'}, {hours:1}); 
+                var updated_hours = updated_object[0].hours;
+            }
+            
+            res.json(updated_hours);
         }
-        
-        
-       res.json(updated_hours);
     }
     catch (error){res.send(error)}
 })
