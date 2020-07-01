@@ -126,11 +126,11 @@ router.post('/home', (req,res)=>{
     var new_year = new_day.year();
     
     //Find events on new day
-    Events.find({participants: req.body.user, time: { $gte: start_of_new_day, $lte: end_of_new_day }}, (err,result)=>{
+    Events.find({participants: req.body.user, date: { $gte: start_of_new_day, $lte: end_of_new_day }}, (err,result)=>{
         
         if(err){res.status(400).json(err)}
         else{res.status(200).json({events:result, month: new_month, date:new_date, year:new_year})}
-    }).sort({ date: 1 });
+    }).sort({ date: 1 }); 
 })
 
 //@Route post request to /events/attendance

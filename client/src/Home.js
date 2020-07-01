@@ -51,7 +51,7 @@ export default function Home() {
 
     
     var events_list = events.map((event)=>
-        <Event key={event._id} event_type={event.event_type} start_time={event.time} duration={event.duration} location={event.location} participants={event.participants} attendance={event.attendance} event_id={event._id}/>
+        <Event key={event._id} event_type={event.event_type} start_time={event.time} duration={event.duration} date={event.date} location={event.location} participants={event.participants} attendance={event.attendance} event_id={event._id} selected={[]} selected_change={()=>{return null}}/>
     )
     
     if (events.length === 0) {
