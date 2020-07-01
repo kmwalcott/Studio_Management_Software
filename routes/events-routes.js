@@ -32,7 +32,7 @@ router.post('/single-event',
     var my_date = new Date(year, month, date, hour, minutes);
 
     let event_object = {
-        event_type: req.body.event_type, location: req.body.location, date: my_date, time:req.body.time, day: '', duration: req.body.duration, teacher: req.body.teacher, instrument: req.body.instrument, participants: req.body.participants, attendance: req.body.attendance, notes: req.body.notes 
+        event_type: req.body.event_type, location: req.body.location, date: my_date, time:req.body.time, day: '', duration: req.body.duration, teacher: req.body.teacher, instrument: req.body.instrument, participants: req.body.participants.split(', '), attendance: req.body.attendance, notes: req.body.notes 
     }
     
     var newEvent = new Events(event_object);
@@ -86,7 +86,7 @@ router.post('/multiple-events',
             duration: req.body.duration, 
             teacher: req.body.teacher, 
             instrument: req.body.instrument, 
-            participants:req.body.participants, 
+            participants: req.body.participants.split(', '), 
             notes: req.body.notes, 
             attendance: req.body.attendance
         };
