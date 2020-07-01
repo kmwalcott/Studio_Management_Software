@@ -316,6 +316,7 @@ router.post('/calendar', async (req,res) =>{
         
         //Loop through all events for the month and place in proper dates
         events.forEach((event)=>{
+            //console.log('Loop entered. +1!');
             var my_date_obj = new Date(event.date);
             
             var js_day = my_date_obj.getDay();//get day of week
@@ -323,14 +324,26 @@ router.post('/calendar', async (req,res) =>{
             
             var my_date = my_date_obj.getDate();//get date 
             
-            moment(my_date_obj.toISOString()).add(parseInt(event.duration), 'minutes');//get end time
-            var end_time_moment = moment().format("h:mm");
+            var start_time_moment = moment(my_date_obj.toISOString());
+            var end_time_moment = start_time_moment.clone().add(parseInt(event.duration), 'minutes');
+            var end_time_moment_formatted = end_time_moment.format("h:mm");
+            
             
             rows.forEach((row, index)=>{
                 if(row[my_day] === my_date){
-                    rows[index][my_day] += ` ${event.time}-${end_time_moment}, ${event.participants[0]}, ${event.location}`;
+                    rows[index][my_day] += "\n";
+                    rows[index][my_day] += `${event.time}-${end_time_moment_formatted}, ${event.participants.join(', ')}, ${event.location}.`;
+                    //console.log(rows[index][my_day]);
+                    //console.log(typeof rows[index][my_day]);
                 }
-            })
+                else if(typeof rows[index][my_day] === 'string'){
+                    rows[index][my_day] += "\n";
+                    rows[index][my_day] += `${event.time}-${end_time_moment_formatted}, ${event.participants.join(', ')}, ${event.location}.`;
+                    //console.log(rows[index][my_day]);
+                    //console.log(typeof rows[index][my_day]);
+                }
+            }) 
+            
         })
         
         res.json(rows); 
