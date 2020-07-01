@@ -7,6 +7,7 @@ import Event from '../Event'
 import Pagination from '../Pagination';
 
 export default function EditEvents() {
+    //FIXME Add back select all and deselect all buttons 
     //States
     const [events, setEvents] = useState([]);
     const [eventTypeList, setEventTypeList] = useState([]);
@@ -163,8 +164,6 @@ export default function EditEvents() {
             <br/>
             <br/>
             <div className="centered-text">
-                <button onClick={select_all}>Select All</button>
-                <button onClick={deselect_all}>Deselect All</button>
                 <Link to="/admin/hours"><button type="button">Back</button></Link>
             </div>
             <div className="centered-text">

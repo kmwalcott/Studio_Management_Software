@@ -65,7 +65,7 @@ router.get('/', (req,res) =>{
 router.post('/get-students', (req,res) =>{
     var user = req.body.user;
 
-    Students.find({teacher: user}, (err,result)=>{
+    Students.find({}, (err,result)=>{
         if(err){res.status(400).json(err)}
         else{res.status(200).json(result)}
     })

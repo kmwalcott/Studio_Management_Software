@@ -6,6 +6,7 @@ import Event from '../Event'
 import Pagination from '../Pagination';
 
 export default function EditEvents() {
+    //FIXME Add back select all and deselect all buttons 
     //Base url client
     const base_url_client = process.env.REACT_APP_BASE_URL_CLIENT;
     
@@ -171,8 +172,6 @@ export default function EditEvents() {
             <br/>
             <div className="centered-div">
                 <button onClick={delete_selected}>Delete Selected</button>
-                <button onClick={select_all}>Select All</button>
-                <button onClick={deselect_all}>Deselect All</button>
                 <Link to="/admin/hours"><button type="button">Back</button></Link>
             </div>
             <div className="centered-div">
