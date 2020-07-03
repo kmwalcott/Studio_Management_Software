@@ -155,7 +155,7 @@ export default function StudentSearch() {
 
     else {
         action = `${process.env.REACT_APP_BASE_URL}/students/search`;
-        var whos_logged_in = '';
+        whos_logged_in = '';
         if(isAuthenticated){
             whos_logged_in = `User: ${user.name}`;
         }

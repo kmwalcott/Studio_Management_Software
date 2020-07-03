@@ -8,9 +8,9 @@ export default function EditStudent() {
     const [student_name, setStudentName] = useState(''); //Information for a single student. Used to populate form.
     const [parent_names, setParentNames] = useState([]);
     const [gender, setGender] = useState('');
-    const [birthday, setBirthday] = useState(null);
-    const [email, setEmail] = useState([]);
-    const [phone, setPhone] = useState([]);
+    const [birthday, setBirthday] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [status, setStatus] = useState('');
     const [makeups, setMakeups] = useState(0);
     const [notes, setNotes]= useState('');
@@ -51,7 +51,12 @@ export default function EditStudent() {
                     setStudentName(student_js.student_name);
                     setParentNames(student_js.parent_names);
                     setGender(student_js.gender);
-                    setBirthday(student_js.birthday);
+                    //Make birthday the right format
+                    var my_date = new Date(student_js.birthday);
+                    var my_month = my_date.getMonth();
+                    var my_day = my_date.getDate();
+                    var my_year = my_date.getFullYear();
+                    setBirthday(`${my_month}/${my_day}/${my_year}`);
                     setEmail(student_js.email);
                     setPhone(student_js.phone);
                     setStatus(student_js.status);
@@ -70,7 +75,7 @@ export default function EditStudent() {
    const student_options = students.map((my_student)=>
     <option key={my_student._id} value={my_student.student_name}>{my_student.student_name}</option>
     )
-    
+
     return (
         <div>
             <div className="admin-folder">

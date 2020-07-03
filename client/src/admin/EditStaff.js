@@ -43,7 +43,12 @@ export default function EditStaff() {
             if (xhr.readyState === 4){
                 if (xhr.status === 200){
                     setName(JSON.parse(xhr.response)[0].name);
-                    setBirthday(JSON.parse(xhr.response)[0].birthday);
+                    //Make birthday the right format
+                    var my_date = new Date(JSON.parse(xhr.response)[0].birthday);
+                    var my_month = my_date.getMonth();
+                    var my_day = my_date.getDate();
+                    var my_year = my_date.getFullYear();
+                    setBirthday(`${my_month}/${my_day}/${my_year}`);
                     setEmail(JSON.parse(xhr.response)[0].email);
                     setPhone(JSON.parse(xhr.response)[0].phone);
                 }

@@ -79,6 +79,7 @@ export default function EditEvents() {
     }
     */
 
+    /*
     //onClick function for "select all" button.
     function select_all(){
         var all_ids = [];
@@ -92,6 +93,7 @@ export default function EditEvents() {
     function deselect_all(){
         setSelected([]);
     }
+    */
 
     //onchange function for selected_change prop of Event components.
     function handleSelectedChange(id){

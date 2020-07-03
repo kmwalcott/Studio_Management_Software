@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom';
 
 export default function StudentForm() {
+    //FIXME: Add back second email and phone?
     //States
+    /*
     const [emailHidden, setEmailHidden] = useState(true);
     const [phoneHidden, setPhoneHidden] = useState(true);
 
@@ -42,7 +44,7 @@ export default function StudentForm() {
             <br/>
         </div>
     }
-    
+    */
     
     const new_student = `${process.env.REACT_APP_BASE_URL}/students`;
 
@@ -68,16 +70,12 @@ export default function StudentForm() {
                 <label htmlFor="birthday">Birthday: </label>
                 <input type="text" id="birthday" name="birthday" placeholder="MM/DD/YYYY" required/>
                 <br/>
-                <label htmlFor="email">Email 1 (Optional): </label>
-                <input type="email" id="email" name="email[1]"/>
-                <button onClick={toggle_email}>Add/Hide</button>
+                <label htmlFor="email">Email (Optional): </label>
+                <input type="email" id="email" name="email"/>
                 <br/>
-                {email2}
-                <label htmlFor="phone">Phone Number 1 (Optional): </label>
-                <input type="text" id="phone" name="phone[1]"/>
-                <button onClick={toggle_phone}>Add/Hide</button>
+                <label htmlFor="phone">Phone Number (Optional): </label>
+                <input type="text" id="phone" name="phone"/>
                 <br/>
-                {phone2}
                 <label htmlFor="status">Status: </label>
                 <select name="status" id="status" required>
                     <option value="">--Choose Status--</option>

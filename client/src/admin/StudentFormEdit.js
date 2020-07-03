@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom';
 
 export default function StudentFormEdit(props) {
@@ -7,19 +7,19 @@ export default function StudentFormEdit(props) {
     var parent2_name = props.parent_names[1];
     var gender = props.gender;
     var birthday = props.birthday;
-    var my_email1 = props.email[0];
-    var my_email2 = props.email[1];
-    var my_phone1 = props.phone[0];
-    var my_phone2 = props.phone[1];
+    var my_email = props.email;
+    var my_phone = props.phone;
     var status = props.status;
     var referrer = props.referrer;
     var notes = props.notes;
     var makeups = props.makeups;
 
+    //FIXME: Add back second email and phone?
     //States
-    const [emailHidden, setEmailHidden] = useState(true);
-    const [phoneHidden, setPhoneHidden] = useState(true);
+    //const [emailHidden, setEmailHidden] = useState(true);
+    //const [phoneHidden, setPhoneHidden] = useState(true);
 
+    /*
     //toggle 2nd email visibility
     function toggle_email(){
         setEmailHidden(!emailHidden);
@@ -56,6 +56,7 @@ export default function StudentFormEdit(props) {
             <br/>
         </div>
     }
+    */
     
     const edit_student = `${process.env.REACT_APP_BASE_URL}/students/update`;
 
@@ -81,16 +82,12 @@ export default function StudentFormEdit(props) {
                 <label htmlFor="birthday">Birthday: </label>
                 <input type="text" id="birthday" name="birthday" placeholder="MM/DD/YYYY" required defaultValue={birthday}/>
                 <br/>
-                <label htmlFor="email1">Email 1 (Optional): </label>
-                <input type="email" id="email1" name="email[1]" defaultValue={my_email1}/>
-                <button onClick={toggle_email}>Add/Hide</button>
+                <label htmlFor="email">Email (Optional): </label>
+                <input type="email" id="email" name="email" defaultValue={my_email}/>
                 <br/>
-                {email2}
-                <label htmlFor="phone1">Phone 1 (Optional): </label>
-                <input type="text" id="phone1" name="phone[1]" defaultValue={my_phone1}/>
-                <button onClick={toggle_phone}>Add/Hide</button>
+                <label htmlFor="phone">Phone (Optional): </label>
+                <input type="text" id="phone" name="phone" defaultValue={my_phone}/>
                 <br/>
-                {phone2}
                 <label htmlFor="status">Status: </label>
                 <select name="status" id="status" required defaultValue={status}>
                     <option value="">--Choose Status--</option>
