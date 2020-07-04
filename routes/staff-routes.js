@@ -50,10 +50,22 @@ router.get('/', (req,res) =>{
 //@Description: Get specific employee's data to display in form. Ajax request.   
 //Access: Admin 
 router.post('/staff-info-form', (req,res) =>{
-    Staff.find({name: req.body.name },{_id:0},(err,result)=>{
-        if(err){res.status(400).send(err)}
-        else{res.status(200).json(result)}
-    })
+    if(req.body.name === ""){
+        //console.log('No student selected.');
+        var result = {
+            name: '', 
+            birthday: '', 
+            email: '', 
+            phone: ''
+        };
+        res.status(200).json([result]);
+    }
+    else{
+        Staff.find({name: req.body.name },{_id:0},(err,result)=>{
+            if(err){res.status(400).send(err)}
+            else{res.status(200).json(result)}
+        }) 
+    }
 })
 
 //@Route post request to /staff/get-hours

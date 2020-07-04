@@ -52,11 +52,16 @@ export default function EditStudent() {
                     setParentNames(student_js.parent_names);
                     setGender(student_js.gender);
                     //Make birthday the right format
-                    var my_date = new Date(student_js.birthday);
-                    var my_month = my_date.getMonth();
-                    var my_day = my_date.getDate();
-                    var my_year = my_date.getFullYear();
-                    setBirthday(`${my_month}/${my_day}/${my_year}`);
+                    if(student_js.birthday === ''){
+                        setBirthday('');
+                    }
+                    else{
+                        var my_date = new Date(student_js.birthday);
+                        var my_month = my_date.getMonth();
+                        var my_day = my_date.getDate();
+                        var my_year = my_date.getFullYear();
+                        setBirthday(`${my_month}/${my_day}/${my_year}`);
+                    }
                     setEmail(student_js.email);
                     setPhone(student_js.phone);
                     setStatus(student_js.status);

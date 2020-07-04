@@ -150,10 +150,28 @@ router.post('/search', (req,res) =>{
 //@Description: Get specific student's data to display in form being edited. Ajax request.   
 //Access: Login required
 router.post('/student-info-form', (req,res) =>{
-    Students.find({ student_name: req.body.student_name },{_id:0},(err,result)=>{
-        if(err){res.status(400).send(err)}
-        else{res.status(200).json(result)}
-    })
+    if(req.body.student_name === ""){
+        //console.log('No student selected.');
+        var result = {
+            student_name: '', 
+            parent_names: [], 
+            gender: '',
+            birthday: '',
+            email: '',
+            phone: '',
+            status: '',
+            referrer: '',
+            notes: '',
+            makeups: 0
+        };
+        res.status(200).json([result]);
+    }
+    else{
+        Students.find({ student_name: req.body.student_name },{_id:0},(err,result)=>{
+            if(err){res.status(400).send(err)}
+            else{res.status(200).json(result)}
+        })
+    }
 })
 
 
