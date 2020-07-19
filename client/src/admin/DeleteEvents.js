@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom';
 //import DatePicker from 'react-datepicker';
 //import 'react-datepicker/dist/react-datepicker.css';
 import Event from '../Event'
@@ -148,10 +147,11 @@ export default function EditEvents() {
         <option key={field} value={field}>{field}</option>
     );    
     
+    /*
     //Background color
     var background_color = {
         backgroundColor: '#f1d592' 
-    }
+    }*/
 
     //Create list of event components to be displayed after filtering 
     const event_list = events.map((event)=>
@@ -169,13 +169,8 @@ export default function EditEvents() {
     }
 
     return (
-        <div style={background_color}>
-            <br/>
-            <br/>
-            <div className="centered-div">
-                <button onClick={delete_selected}>Delete Selected</button>
-                <Link to="/admin/hours"><button type="button">Back</button></Link>
-            </div>
+        <div>
+            <button onClick={delete_selected}>Delete Selected</button>
             <div className="centered-div">
                 <select name="event_types" id="event_types" onChange={filter_events}>
                     <option value="">--Choose event type--</option>

@@ -11,9 +11,7 @@ import Calendar from './Calendar';
 import Attendance from './Attendance';
 import TimeClock from './TimeClock';
 import StudentInfo from './StudentInfo';
-import AdminStudents from './admin/AdminStudents';
-import AdminStaff from './admin/AdminStaff';
-import AdminHours from './admin/AdminHours';
+import Admin from './admin/Admin';
 import AdminSettings from './admin/AdminSettings';
 import NewEvent from './admin/NewEvent';
 import NewEvents from './admin/NewEvents';
@@ -46,13 +44,11 @@ function App() {
         <PrivateRoute path='/attendance' component={Attendance}/>
         <PrivateRoute path='/timeclock' component={TimeClock}/>
         <PrivateRoute path='/studentinfo' component={StudentInfo}/>
-        <PrivateRoute path='/admin/students' exact component={AdminStudents}/>
+        <PrivateRoute path='/admin' exact component={Admin}/>
         <PrivateRoute path="/admin/students/new-student" component={NewStudent}/>
         <PrivateRoute path="/admin/students/edit-student" component={EditStudent}/>
-        <PrivateRoute path='/admin/staff' exact component={AdminStaff}/>
         <PrivateRoute path='/admin/staff/new-staff' component={NewStaff}/>
         <PrivateRoute path='/admin/staff/edit-staff' component={EditStaff}/>
-        <PrivateRoute path='/admin/hours' exact component={AdminHours}/>
         <PrivateRoute path="/admin/hours/new-event" component={NewEvent}/>
         <PrivateRoute path="/admin/hours/new-events" component={NewEvents}/>
         <PrivateRoute path="/admin/hours/edit-events" component={EditEvents}/>

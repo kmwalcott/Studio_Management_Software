@@ -1,10 +1,13 @@
 import React from 'react'
+import Container from 'react-bootstrap/Container';
 
 export default function Intro() {
         return (
-            <div className="centered-text">
-                <h1>Music Studio Management Software</h1>
-                <p>Please log in to continue. Credentials for existing users can be found in the readme file of the github repository. Alternatively, you can create a new user on the login page.</p>
+            <div>
+                <Container className="text-center">
+                    <h1>Music Studio Management Software</h1>
+                    <p>Please log in to continue. Credentials for existing users can be found in the readme file of the github repository.</p>
+                </Container>
             </div>
         )
     

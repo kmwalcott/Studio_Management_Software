@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 export default function EventForm(props) {
     //List props (settings)
@@ -42,60 +43,81 @@ export default function EventForm(props) {
 
     return (
             <div>
-                <form method="POST" action={action} className="admin-form">
-                    <label for="event_type">Event Type: </label>
-                    <select name="event_type" id="event_type" required defaultValue={event_type}>
-                        <option value="">--Choose Event Type--</option>
-                        {event_type_dropdown}
-                    </select>
-                    <br/>
-                    <label for="location">Location: </label>
-                    <select name="location" id="location" required defaultValue={location}>
-                        <option value="">--Choose Location--</option>
-                        {location_dropdown}
-                    </select>
-                    <br/>
-                    <label for="time">Event Time: </label>
-                    <input type="text" id="time" name="time" required defaultValue={time}/>
-                    <br/>
-                    <label for="duration"> Event Duration in Minutes: </label>
-                    <input type="text" id="duration" name="duration" required defaultValue={duration}/>
-                    <br/>
-                    <label for="date">Date: </label>
-                    <DatePicker id="date" name="date" required selected={eventDate} onChange={date =>setEventDate(date)} />
-                    <br/>
-                    <label for="teacher">Teacher (Optional): </label>
-                    <select name="teacher" id="teacher" defaultValue={teacher}>
-                        <option value="">--Choose Teacher--</option>
-                        {teacher_dropdown}
-                    </select>
-                    <br/>
-                    <label for="instrument">Instrument (Optional): </label>
-                    <select name="instrument" id="instrument" defaultValue={instrument}>
-                        <option value="">--Choose Instrument--</option>
-                        {instrument_dropdown}
-                    </select>
-                    <br/>
-                    <label for="notes">Notes (Optional): </label>
-                    <input type="text" name="notes" id="notes" defaultValue={notes}/>
-                    <br/>
-                    <label for="participants">Participants: </label>
-                    <input type="text" id="participants" required name="participants" placeholder="Separate with comma" defaultValue={participants}/>
-                    <br/>
-                    <label for="attendance">Attendance (Optional): </label>
-                    <select name="attendance" id="attendance" defaultValue={attendance}>
-                        <option value="Not yet entered">--Choose Attendance--</option>
-                        <option value="present">Present</option>
-                        <option value="late">Late</option>
-                        <option value="absent_makeup">Absent- Give Makeup</option>
-                        <option value="absent_no_makeup">Absent- No Makeup</option>
-                        <option value="teacher_absent">Teacher Absent</option>
-                        <option value="not_applicable">Not Applicable</option>
-                    </select>
-                    <br/>
-                    <button type="submit">Submit</button>
-                    <Link to="/admin/hours"><button type="button">Cancel</button></Link>
-                </form>
+                <Container>
+                <Form method="POST" action={action}>
+                    <Form.Group>
+                        <Form.Label for="event_type">Event Type: </Form.Label>
+                        <Form.Control as="select" name="event_type" id="event_type" required defaultValue={event_type}>
+                            <option value="">--Choose Event Type--</option>
+                            {event_type_dropdown}
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label for="location">Location: </Form.Label>
+                        <Form.Control as="select" name="location" id="location" required defaultValue={location}>
+                            <option value="">--Choose Location--</option>
+                            {location_dropdown}
+                        </Form.Control>
+                    </Form.Group>
+                    
+                    <Form.Group>
+                        <Form.Label for="time">Event Time: </Form.Label>
+                        <Form.Control type="text" id="time" name="time" required defaultValue={time}/>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label for="duration"> Event Duration in Minutes: </Form.Label>
+                        <Form.Control type="text" id="duration" name="duration" required defaultValue={duration}/>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label for="date">Date: </Form.Label>
+                        <DatePicker id="date" name="date" required selected={eventDate} onChange={date =>setEventDate(date)} />
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label for="teacher">Teacher (Optional): </Form.Label>
+                        <Form.Control as="select" name="teacher" id="teacher" defaultValue={teacher}>
+                            <option value="">--Choose Teacher--</option>
+                            {teacher_dropdown}
+                        </Form.Control>
+                    </Form.Group>
+                    
+                    <Form.Group>
+                        <Form.Label for="instrument">Instrument (Optional): </Form.Label>
+                        <Form.Control as="select" name="instrument" id="instrument" defaultValue={instrument}>
+                            <option value="">--Choose Instrument--</option>
+                            {instrument_dropdown}
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label for="notes">Notes (Optional): </Form.Label>
+                        <Form.Control type="text" name="notes" id="notes" defaultValue={notes}/>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label for="participants">Participants: </Form.Label>
+                        <Form.Control type="text" id="participants" required name="participants" placeholder="Separate with comma" defaultValue={participants}/>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label for="attendance">Attendance (Optional): </Form.Label>
+                        <Form.Control as="select" name="attendance" id="attendance" defaultValue={attendance}>
+                            <option value="Not yet entered">--Choose Attendance--</option>
+                            <option value="present">Present</option>
+                            <option value="late">Late</option>
+                            <option value="absent_makeup">Absent- Give Makeup</option>
+                            <option value="absent_no_makeup">Absent- No Makeup</option>
+                            <option value="teacher_absent">Teacher Absent</option>
+                            <option value="not_applicable">Not Applicable</option>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Button type="submit">Submit</Button>
+                </Form>
+                </Container>
             </div>
         )
     

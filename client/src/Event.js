@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import AttendanceForm from './AttendanceForm';
+import Button from 'react-bootstrap/Button';
 
 export default function Event(props) {
     //view state
@@ -59,7 +60,7 @@ export default function Event(props) {
             <div style={border_style}>
                 <p>{event_type} at {start_time} for {duration} minutes. Date: {month}/{day}/{year}. Location: {location}. Participants: {participants_string}</p>
                 <p>Attendance: {attendance}</p>
-                <button onClick={change_view}>Attendance</button>
+                <Button onClick={change_view}>Attendance</Button>
                 <br/>
                 <label htmlFor="select">Select</label>
                 <input type="checkbox" id="select" name="select" checked={checked} onChange={handle_change}/>
@@ -71,7 +72,7 @@ export default function Event(props) {
         return (
             <div style={border_style}>
                 <AttendanceForm event_id={event_id}/>
-                <button onClick={change_view}>Go Back</button>
+                <Button onClick={change_view}>Go Back</Button>
             </div>
         )   
     }

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import EventForm from './EventForm';
-import {Link} from 'react-router-dom';
 
 export default function NewEvent() {
      //States
@@ -52,22 +51,8 @@ export default function NewEvent() {
     var notes = '';
      
     return (
-        <div>
-            <div className="admin-folder">
-                <div className="admin-folder-top">
-                    <ul>
-                        <Link to="/admin/students"><li>Manage Students</li></Link>
-                        <Link to="/admin/staff"><li>Manage Staff</li></Link>
-                        <Link to="/admin/hours"><li className="selected-tab">Hours and Scheduling</li></Link>
-                        <Link to="/admin/settings"><li>Settings</li></Link>
-                    </ul>
-                </div>
-                <div className="admin-folder-bottom">
-                    <br/>
-                    <br/>
-                    <EventForm action={action} event_type_list={eventTypeList} location_list={locationList} teacher_list={teacherList} instrument_list={instrumentList} event_type={event_type} location={location} date={date} time={time} duration={duration} teacher={teacher} instrument={instrument} participants={participants} attendance={attendance} notes={notes}/>
-                </div> 
-            </div>
+        <div>         
+            <EventForm action={action} event_type_list={eventTypeList} location_list={locationList} teacher_list={teacherList} instrument_list={instrumentList} event_type={event_type} location={location} date={date} time={time} duration={duration} teacher={teacher} instrument={instrument} participants={participants} attendance={attendance} notes={notes}/>
         </div>
     )
 }

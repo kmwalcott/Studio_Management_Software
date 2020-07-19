@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Table from './Table';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export default function StudentInfo() {
   //Create states
   const [queryResult, setQueryResult] = useState([]);
+  const [showModal, setShowModal] = useState(true);
 
   //Effects
   function get_student_info() {
@@ -139,17 +142,45 @@ export default function StudentInfo() {
     rows = [['', '', '', '']];
   }
 
-  
-  if (queryResult.length > 0){
-    return (
-        <Table rows={rows} columns={header_renamed}/>
-    )
-  }
-  else{
-    return (
-      <p>No results found.</p>
-    )
-  }
+
+  if(showModal === true){
+    if (queryResult.length > 0){
+      return (
+          <Modal.Dialog>
+            <Modal.Header>
+              <Modal.Title>Search Results</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Table rows={rows} columns={header_renamed}/>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={()=> setShowModal(false)} variant="secondary">Close</Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+      )
+    }
+    else{
+      return (
+        <Modal.Dialog>
+          <Modal.Header>
+            <Modal.Title>Search Results</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>No results found.</p>
+          </Modal.Body>
+          <Modal.Footer>
+              <Button onClick={()=> setShowModal(false)} variant="secondary">Close</Button>
+          </Modal.Footer>
+        </Modal.Dialog>
+      )
+    }
+}
+
+else{
+  return (
+   <div></div>
+  )
+}
 }
 
 

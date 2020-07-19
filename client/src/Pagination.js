@@ -8,7 +8,7 @@ export default function Pagination(props){
 
     return (
         <div>
-            <nav>
+            <nav id="pagination">
                 <ul>
                     {page_numbers.map(number=>
                         <li key={number}><a onClick={()=> props.paginate(number)}>{number}</a></li>

@@ -45,7 +45,7 @@ router.post('/',
     var newStudent = new Students(student_object);
     newStudent.save((err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/students`)}
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
     })
 })
 
@@ -221,7 +221,7 @@ router.post('/update',
     }, 
         {useFindAndModify: false}, (err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/students`)}
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
     })
 })
 
@@ -233,7 +233,7 @@ router.delete('/', (req,res) =>{
     
     Students.deleteOne({student_name: req.body.name },(err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/students`)}
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
     })
 })
 

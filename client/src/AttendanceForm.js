@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button';
 
 export default function AttendanceForm(props) {
     var event_id = props.event_id;
@@ -19,7 +20,7 @@ export default function AttendanceForm(props) {
                 </select>
                 <label htmlFor="notes">Notes: </label>
                 <input type="text" name="notes" id="notes"/>
-                <button type="submit">Submit</button>
+                <Button type="submit">Submit</Button>
             </form>
         </div>
     )

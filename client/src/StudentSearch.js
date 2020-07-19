@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useAuth0 } from "./react-auth0-spa";
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 export default function StudentSearch() {
-    const {user, isAuthenticated} = useAuth0();
-
     //Declare state variables
     const [advancedIsOpen, setAdvancedIsOpen] = useState(false);
     const [settings, setSettings] = useState('[{"event_type":["Individual Lesson","Ensemble Rehearsal","Makeup Lesson","Meeting","Substitute Lesson","Other"],"location":["Main Studio","Lifesong","Home","Online","Other"],"teacher":["Kyle","Jarell","Jen","Christy","Michael","Emily","Gabe","Andrea","Other"],"instrument":["Piano","Violin","Viola","Voice","Other"]}]');
@@ -51,17 +50,14 @@ export default function StudentSearch() {
 
     if (advancedIsOpen) {
         var action = `${process.env.REACT_APP_BASE_URL}/students/search`;
-        var whos_logged_in = '';
-        if(isAuthenticated){
-            whos_logged_in = `User: ${user.name}`;
-        }
-        else{}
         return (
             <>
             <form method="POST" action={action}>
                 <input type="text" name="student_name" id="student_name" placeholder="Find student" />
-                <button type="submit">Search</button>
-                <button type="button" onClick={() => setAdvancedIsOpen(!(advancedIsOpen))}>Advanced</button>
+                <ButtonGroup>
+                    <Button type="submit">Search</Button>
+                    <Button type="button" onClick={() => setAdvancedIsOpen(!(advancedIsOpen))}>Advanced</Button>
+                </ButtonGroup>
                 <fieldset>
                     <legend>Filter Results</legend>
                     <select name="gender">
@@ -148,18 +144,12 @@ export default function StudentSearch() {
                     <input type="checkbox" checked name="include_email" id="include_email" value="checked" />
                 </fieldset>
             </form>
-            <p>{whos_logged_in}</p>
             </>
         )
     }
 
     else {
         action = `${process.env.REACT_APP_BASE_URL}/students/search`;
-        whos_logged_in = '';
-        if(isAuthenticated){
-            whos_logged_in = `User: ${user.name}`;
-        }
-        else{}
         return (
             <>
             <form method="POST" action={action}>
@@ -185,12 +175,12 @@ export default function StudentSearch() {
                 <input type="hidden" name="include_instrument" value=""/>
                 <input type="hidden" name="include_location" value=""/>
                 <input type="hidden" name="include_teacher" value=""/>
-                <button type="submit">Search</button>
-                <button type="button" onClick={() => setAdvancedIsOpen(!(advancedIsOpen))}>Advanced</button>
+                <ButtonGroup>
+                    <Button type="submit">Search</Button>
+                    <Button type="button" onClick={() => setAdvancedIsOpen(!(advancedIsOpen))}>Advanced</Button>
+                </ButtonGroup>
             </form>
-            <p>{whos_logged_in}</p>
             </>
         )
-
     }
 }

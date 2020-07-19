@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Form from 'react-bootstrap/Form';
 
 export default function Setting(props) {
     const [view, setView] = useState('default');
     var setting_title = props.title;
     var setting_db = props.setting;
-
-    var button_color = {
-        backgroundColor: 'orange' 
-    }
 
     function add_view(){
         setView('add');
@@ -23,8 +22,10 @@ export default function Setting(props) {
         return (
             <div>
                 <p>{setting_title}</p>
-                <button style={button_color} onClick={add_view}>Add</button>
-                <button style={button_color} onClick={drop_view}>Drop</button>
+                <ButtonGroup>
+                    <Button onClick={add_view}>Add</Button>
+                    <Button onClick={drop_view}>Drop</Button>
+                </ButtonGroup>
             </div>
         )
     }
@@ -33,13 +34,16 @@ export default function Setting(props) {
         var action = `${process.env.REACT_APP_BASE_URL}/settings/add-setting`;
         return (
             <div>
-                <p> Add {setting_title}: </p>
-                <form method="POST" action={action}>
-                    <input type="text" size="30" name="value" placeholder="Enter what you'd like to add"/>
-                    <input type="hidden" name="setting" value={setting_db}/>
-                    <button style={button_color} type="submit">Submit</button>
-                </form>
-                <button style={button_color} onClick={default_view}>Cancel</button>
+                <Form method="POST" action={action}>
+                    <Form.Label> Add {setting_title}: </Form.Label>
+                    <Form.Control type="text" size="30" name="value" placeholder="Enter what you'd like to add"/>
+                    <Form.Control type="hidden" name="setting" value={setting_db}/>
+                    <ButtonGroup>
+                        <Button type="submit">Submit</Button>
+                        <Button onClick={default_view}>Cancel</Button>
+                    </ButtonGroup>
+                </Form>
+                
             </div>
         )
     }
@@ -48,13 +52,15 @@ export default function Setting(props) {
         action = `${process.env.REACT_APP_BASE_URL}/settings/drop-setting`;
         return (
             <div>
-                 <p> Drop {setting_title}: </p>
-                <form method="POST" action={action}>
-                    <input type="text" size="30" name="value" placeholder="Enter what you'd like to drop"/>
-                    <input type="hidden" name="setting" value={setting_db}/>
-                    <button style={button_color} type="submit">Submit</button>
-                </form>
-                <button style={button_color} onClick={default_view}>Cancel</button>
+                <Form method="POST" action={action}>
+                    <Form.Label> Drop {setting_title}: </Form.Label>
+                    <Form.Control type="text" size="30" name="value" placeholder="Enter what you'd like to drop"/>
+                    <Form.Control type="hidden" name="setting" value={setting_db}/>
+                    <ButtonGroup>
+                        <Button type="submit">Submit</Button>
+                        <Button onClick={default_view}>Cancel</Button>
+                    </ButtonGroup>
+                </Form>
             </div>
         )
     }

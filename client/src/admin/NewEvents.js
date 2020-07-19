@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import EventsForm from './EventsForm';
-import {Link} from 'react-router-dom';
 
 export default function NewEvents() {
      //States
@@ -55,22 +54,8 @@ export default function NewEvents() {
     var events = [];
      
     return (
-        <div>
-            <div className="admin-folder">
-                <div className="admin-folder-top">
-                    <ul>
-                        <Link to="/admin/students"><li>Manage Students</li></Link>
-                        <Link to="/admin/staff"><li>Manage Staff</li></Link>
-                        <Link to="/admin/hours"><li className="selected-tab">Hours and Scheduling</li></Link>
-                        <Link to="/admin/settings"><li>Settings</li></Link>
-                    </ul>
-                </div>
-                <div className="admin-folder-bottom">
-                    <br/>
-                    <br/>
-                    <EventsForm action={action} event_type_list={eventTypeList} location_list={locationList} teacher_list={teacherList} instrument_list={instrumentList} event_type={event_type} location={location} initial_date={initial_date} final_date={final_date} time={time} day={day} duration={duration} teacher={teacher} instrument={instrument} participants={participants} attendance={attendance} notes={notes} events_array={events}/>
-                </div> 
-            </div>
+        <div>        
+            <EventsForm action={action} event_type_list={eventTypeList} location_list={locationList} teacher_list={teacherList} instrument_list={instrumentList} event_type={event_type} location={location} initial_date={initial_date} final_date={final_date} time={time} day={day} duration={duration} teacher={teacher} instrument={instrument} participants={participants} attendance={attendance} notes={notes} events_array={events}/>
         </div>
     )
 }

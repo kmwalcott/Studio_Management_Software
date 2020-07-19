@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import EventsForm from './EventsForm';
-import {Link} from 'react-router-dom';
 //import DatePicker from 'react-datepicker';
 //import 'react-datepicker/dist/react-datepicker.css';
 import Event from '../Event'
@@ -147,10 +146,6 @@ export default function EditEvents() {
     <Event key={event._id} event_type={event.event_type} start_time={event.time} duration={event.duration} location={event.location} participants={event.participants} attendance={event.attendance} event_id={event._id} selected={selected} selected_change={() => handleSelectedChange(event._id)} />
     ); 
     
-    var background_color = {
-        backgroundColor: '#f1d592' 
-    }
-
     //Get one page of events
     const index_of_last_event = currentPage * eventsPerPage;
     const index_of_first_event = index_of_last_event - eventsPerPage;
@@ -162,30 +157,23 @@ export default function EditEvents() {
     }
           
     return (
-        <div style={background_color}>
-            <br/>
-            <br/>
-            <div className="centered-text">
-                <Link to="/admin/hours"><button type="button">Back</button></Link>
-            </div>
-            <div className="centered-text">
-                <select name="event_types" id="event_types" onChange={filter_events}>
-                    <option value="">--Choose event type--</option>
-                    {event_types_dropdown}
-                </select>
-                <select name="location" id="location" onChange={filter_events}>
-                    <option value="">--Choose location--</option>
-                    {location_dropdown}
-                </select>
-                <select name="teacher" id="teacher" onChange={filter_events}>
-                    <option value="">--Choose teacher--</option>
-                    {teacher_dropdown}
-                </select>
-                <select name="instrument" id="instrument" onChange={filter_events}>
-                    <option value="">--Choose instrument--</option>
-                    {instrument_dropdown}
-                </select>
-            </div>
+        <div>          
+            <select name="event_types" id="event_types" onChange={filter_events}>
+                <option value="">--Choose event type--</option>
+                {event_types_dropdown}
+            </select>
+            <select name="location" id="location" onChange={filter_events}>
+                <option value="">--Choose location--</option>
+                {location_dropdown}
+            </select>
+            <select name="teacher" id="teacher" onChange={filter_events}>
+                <option value="">--Choose teacher--</option>
+                {teacher_dropdown}
+            </select>
+            <select name="instrument" id="instrument" onChange={filter_events}>
+                <option value="">--Choose instrument--</option>
+                {instrument_dropdown}
+            </select>   
             <EventsForm action={action} event_type_list={eventTypeList} location_list={locationList} teacher_list={teacherList} instrument_list={instrumentList} event_type={event_type} location={location} initial_date={initial_date} final_date={final_date} time={time} day={day} duration={duration} teacher={teacher} instrument={instrument} participants={participants} attendance={attendance} notes={notes} selected={selected}/>
             {current_events}
             <Pagination eventsPerPage={eventsPerPage} totalEvents={events.length} paginate={paginate} />

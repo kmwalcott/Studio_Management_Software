@@ -1,5 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 export default function StaffForm(props) {
     var action = props.action;
@@ -10,22 +12,31 @@ export default function StaffForm(props) {
     
     return (
         <div>
-            <form method="POST" action={action} className="admin-form">
-                <label htmlFor="name">Name: </label>
-                <input type="text" name="name" id="name" placeholder="e.g. John Doe" required defaultValue={name}/>
-                <br/>
-                <label htmlFor="birthday">Birthday: </label>
-                <input type="text" id="birthday" name="birthday" placeholder="MM/DD/YYYY" required defaultValue={birthday}/>
-                <br/>
-                <label htmlFor="email">Email: </label>
-                <input type="email" name="email" id="email" required defaultValue={email}/>
-                <br/>
-                <label htmlFor="phone">Phone: </label>
-                <input type="text" name="phone" id="phone" required defaultValue={phone}/>
-                <br/>
-                <button type="submit">Submit</button>
-                <Link to="/admin/staff"><button type="button">Cancel</button></Link>
-            </form>
+            <Container>
+            <Form method="POST" action={action}>
+                <Form.Group>
+                    <Form.Label htmlFor="name">Name: </Form.Label>
+                    <Form.Control type="text" name="name" id="name" placeholder="e.g. John Doe" required defaultValue={name}/>
+                </Form.Group>
+                
+                <Form.Group>
+                    <Form.Label htmlFor="birthday">Birthday: </Form.Label>
+                    <Form.Control type="text" id="birthday" name="birthday" placeholder="MM/DD/YYYY" required defaultValue={birthday}/>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label htmlFor="email">Email: </Form.Label>
+                    <Form.Control type="email" name="email" id="email" required defaultValue={email}/>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label htmlFor="phone">Phone: </Form.Label>
+                    <Form.Control type="text" name="phone" id="phone" required defaultValue={phone}/>
+                </Form.Group>
+
+                <Button type="submit">Submit</Button>
+            </Form>
+            </Container>
         </div>
     )
 }

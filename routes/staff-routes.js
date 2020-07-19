@@ -29,12 +29,9 @@ router.post('/',
     var newStaff = new Staff(staff_object);
     newStaff.save((err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
-        
-        
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
     })
 })
-
 
 //@Route get request to /staff
 //@Description: Get all staff.  
@@ -146,9 +143,8 @@ router.post('/update',
     var base_url_client = process.env.BASE_URL_CLIENT;
     Staff.findOneAndUpdate({ "name": req.body.name },{name:req.body.name, birthday:req.body.birthday, email:req.body.email, phone:req.body.phone}, {useFindAndModify: false}, (err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
     })
-
 })
 
 //@Route delete request to /staff
@@ -158,7 +154,7 @@ router.delete('/', (req,res) =>{
     var base_url_client = process.env.BASE_URL_CLIENT;
     Staff.deleteOne({ name: req.body.name },(err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/staff`)}
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
     })
 })
 

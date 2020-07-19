@@ -38,7 +38,7 @@ router.post('/single-event',
     var newEvent = new Events(event_object);
     newEvent.save((err,result)=>{
         if(err){res.status(400).send(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/hours`)} 
+        else{res.status(200).redirect(`${base_url_client}/admin`)} 
     })    
 })
 
@@ -101,11 +101,9 @@ router.post('/multiple-events',
     Events.insertMany(multiple_events, (err,result)=>{
         
         if(err){res.status(400).json(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/hours`)}
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
         
     })
-    
-
 })
 
 //@Route post request to /events/home
@@ -464,9 +462,8 @@ router.post('/update',
     Events.updateMany({_id: {$in: selected}}, update, (err,result)=>{
         
         if(err){res.status(400).json(err)}
-        else{res.status(200).redirect(`${base_url_client}/admin/hours`)}
+        else{res.status(200).redirect(`${base_url_client}/admin`)}
     })
-    
 })
 
 //@Route post request to /events/edit-attendance

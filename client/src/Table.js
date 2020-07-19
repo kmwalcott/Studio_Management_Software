@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactTable from 'react-bootstrap/Table'
 
 export default function Table(props) {
     var rows_in_td = [];
@@ -20,7 +21,7 @@ export default function Table(props) {
 
     return (
             <div>
-            <table>
+            <ReactTable bordered striped>
             <thead>
                 <tr>
                 {my_columns}
@@ -29,7 +30,7 @@ export default function Table(props) {
             <tbody>
                 {table_body}
             </tbody>
-            </table>
+            </ReactTable>
             </div>
     )
 }

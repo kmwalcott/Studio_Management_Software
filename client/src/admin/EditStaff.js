@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom';
 import StaffForm from './StaffForm';
 
 export default function EditStaff() {
@@ -74,29 +73,12 @@ export default function EditStaff() {
 
     return (
         <div>
-            <div className="admin-folder">
-                <div className="admin-folder-top">
-                    <ul>
-                        <Link to="/admin/students"><li>Manage Students</li></Link>
-                        <Link to="/admin/staff"><li className="selected-tab">Manage Staff</li></Link>
-                        <Link to="/admin/hours"><li>Hours and Scheduling</li></Link>
-                        <Link to="/admin/settings"><li>Settings</li></Link>
-                    </ul>
-                </div>
-                <div className="admin-folder-bottom">
-                    <br/>
-                    <br/>
-                    <div className="centered-text">
-                        <select id="my_dropdown" onChange={auto_populate}>
-                            <option value="">--Choose Staff Member--</option>
-                            {staff_options}
-                        </select>
-                    </div>
-                    <StaffForm action={action} name={name} birthday={birthday} email={email} phone={phone}/>
-                </div> 
-            </div>
+            <select id="my_dropdown" onChange={auto_populate}>
+                <option value="">--Choose Staff Member--</option>
+                {staff_options}
+            </select>
+            <StaffForm action={action} name={name} birthday={birthday} email={email} phone={phone}/>       
         </div>
     )
-
 }
 

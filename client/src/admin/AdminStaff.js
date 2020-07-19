@@ -1,9 +1,14 @@
-import React from 'react'
-import {Link} from 'react-router-dom';
+import React, {useState} from 'react'
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
+import NewStaff from './NewStaff';
+import EditStaff from './EditStaff';
 
 export default function AdminStaff() {
-    //onclick function for delete button
-    
+    //States
+    const [view, setView] = useState('menu');
+
+    //onclick function for delete Button
     function delete_staff(){
         var name = prompt('Enter full name of staff member to delete.'); 
         var toSend = {name: name};
@@ -22,27 +27,31 @@ export default function AdminStaff() {
         xhr.send(jsonString);  
     }
     
-    return (
-        <div>
-            <div className="admin-folder">
-                <div className="admin-folder-top">
-                    <ul>
-                        <Link to="/admin/students"><li>Manage Students</li></Link>
-                        <Link to="/admin/staff"><li className="selected-tab">Manage Staff</li></Link>
-                        <Link to="/admin/hours"><li>Hours and Scheduling</li></Link>
-                        <Link to="/admin/settings"><li>Settings</li></Link>
-                    </ul>
-                </div>
-                <div className="admin-folder-bottom">
-                    <br/>
-                    <br/>
-                    <ul>
-                        <li><Link to="/admin/staff/new-staff"><button className="margin30">Create New Staff Member</button></Link></li>
-                        <li><Link to="/admin/staff/edit-staff"><button className="margin30">Edit Staff Info</button></Link></li>
-                        <li><button className="margin30" onClick={delete_staff}>Delete Staff Member</button></li>
-                    </ul>
-                </div> 
+    if(view ==='menu'){
+        return (
+            <div>         
+                <ListGroup className="no-bullets">
+                    <ListGroup.Item><Button onClick={()=> setView('add')}>Create New Staff Member</Button></ListGroup.Item>
+                    <ListGroup.Item><Button onClick={()=> setView('edit')}>Edit Staff Info</Button></ListGroup.Item>
+                    <ListGroup.Item><Button onClick={delete_staff}>Delete Staff Member</Button></ListGroup.Item>
+                </ListGroup> 
             </div>
-        </div>
-    )
+        )
+    }
+    else if(view === 'add'){
+        return (
+            <div>         
+                <Button onClick={()=> setView('menu')}>Back</Button>
+                <NewStaff/>
+            </div>
+        )
+    }
+    else if(view === 'edit'){
+        return (
+            <div>         
+                <Button onClick={()=> setView('menu')}>Back</Button>
+                <EditStaff/>
+            </div>
+        )
+    }
 }

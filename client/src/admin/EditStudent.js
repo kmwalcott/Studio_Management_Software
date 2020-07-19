@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom';
 import StudentFormEdit from './StudentFormEdit';
 
 export default function EditStudent() {
@@ -82,30 +81,14 @@ export default function EditStudent() {
     )
 
     return (
-        <div>
-            <div className="admin-folder">
-                <div className="admin-folder-top">
-                    <ul>
-                        <Link to="/admin/students"><li className="selected-tab">Manage Students</li></Link>
-                        <Link to="/admin/staff"><li>Manage Staff</li></Link>
-                        <Link to="/admin/hours"><li>Hours and Scheduling</li></Link>
-                        <Link to="/admin/settings"><li>Settings</li></Link>
-                    </ul>
-                </div>
-                <div className="admin-folder-bottom">
-                    <br/>
-                    <br/>
-                    <div>
-                        <div className="centered-text">
-                            <select id="my_dropdown" onChange={auto_populate}>
-                                <option value="">--Choose Student--</option>
-                                {student_options}
-                            </select>
-                        </div>
-                        <StudentFormEdit student_name={student_name} parent_names={parent_names} gender={gender} birthday={birthday} email={email} phone={phone} status={status} makeups={makeups} notes={notes} referrer={referrer}/>
-                    </div>
-                </div> 
+        <div>       
+            <div className="centered-text">
+                <select id="my_dropdown" onChange={auto_populate}>
+                    <option value="">--Choose Student--</option>
+                    {student_options}
+                </select>
             </div>
+            <StudentFormEdit student_name={student_name} parent_names={parent_names} gender={gender} birthday={birthday} email={email} phone={phone} status={status} makeups={makeups} notes={notes} referrer={referrer}/>      
         </div>
     )
 }

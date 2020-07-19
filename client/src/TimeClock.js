@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import Table from './Table';
 import { useAuth0 } from "./react-auth0-spa";
 
@@ -89,8 +91,10 @@ export default function TimeClock() {
 
     return (
         <div>
-            <div className="centered-text"><button onClick={time_punch}>Punch</button></div>
-            <Table columns={columns} rows={rows_processed}/>
+            <Container className="text-center">
+                <Button onClick={time_punch}>Punch</Button>
+                <Table columns={columns} rows={rows_processed}/>
+            </Container>
         </div>
     )
 }
