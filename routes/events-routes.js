@@ -3,8 +3,6 @@ const router = express.Router();
 const Events = require('../models/Events');
 const moment = require('moment');
 const { check, validationResult } = require('express-validator');
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
 
 //@Route post request to /events/single-event
 //@Description: Create a single new event. Form submission. 

@@ -4,7 +4,6 @@ const Students = require('../models/Students.js');
 const Queries = require('../models/Queries');
 const { check, validationResult } = require('express-validator');
 
-
 //Note: Student model has 17 fields. 
 
 //@Route post request to /students

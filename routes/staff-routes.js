@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Staff = require('../models/Staff.js');
 const { check, validationResult } = require('express-validator');
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
 
 //@Route post request to /staff
 //@Description: Create a new staff member. Form submission. 
