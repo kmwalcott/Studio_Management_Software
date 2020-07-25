@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Staff = require('../models/Staff.js');
 const { check, validationResult } = require('express-validator');
+const moment = require('moment');
 
 //@Route post request to /staff
 //@Description: Create a new staff member. Form submission. 
@@ -61,6 +62,38 @@ router.post('/staff-info-form', (req,res) =>{
             else{res.status(200).json(result)}
         }) 
     }
+})
+
+//@Route post request to /staff/calculate-hours
+//@Description: Get specific employee's data to display in form. Ajax request.   
+//Access: Admin 
+router.post('/calculate-hours', async (req,res) =>{
+    let initial_date = new Date (req.body.initial_date);
+    let final_date = new Date (req.body.final_date);
+    let initial_moment = moment(initial_date.toISOString()).startOf('day');
+    let final_moment = moment(final_date.toISOString()).startOf('day');
+    let rows = [];
+    let staff_list = await Staff.find({}, {_id: 0, hours: 1, name: 1});
+    //console.log(staff_list);
+    staff_list.forEach((staff_member)=>{
+        let hours = staff_member.hours;
+        let hours_total = 0;
+        hours.forEach((punch_group)=>{
+            let date1 = new Date(punch_group.time_in);
+            let date2 = new Date(punch_group.time_out);
+            let a = moment(date1.toISOString());
+            let b = moment(date2.toISOString());
+            let diff = a.diff(b);
+            if(a.isAfter(initial_moment) && a.isBefore(final_moment)){
+                hours_total += diff;  
+            }    
+        })
+        let current_row = [staff_member.name, hours_total*(-1/3600000)];
+        rows.push(current_row); 
+    })
+    
+    res.json(rows);
+    //res.json(4);
 })
 
 //@Route post request to /staff/get-hours
